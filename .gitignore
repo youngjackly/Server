@@ -17,6 +17,9 @@
 *.out
 *.app
 
+#qtcreatro
+*.user
+
 # CMake
 CMakeCache.txt
 CMakeFiles
