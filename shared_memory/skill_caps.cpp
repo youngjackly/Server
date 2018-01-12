@@ -23,7 +23,7 @@
 #include "../common/memory_mapped_file.h"
 #include "../common/eqemu_exception.h"
 #include "../common/classes.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 
 void LoadSkillCaps(SharedDatabase *database, const std::string &prefix) {
 	EQEmu::IPCMutex mutex("skill_caps");

@@ -29,7 +29,7 @@
 #include "../common/unix.h"
 #endif
 
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/guilds.h"
 
 #include "guild_mgr.h"

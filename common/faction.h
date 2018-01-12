@@ -19,7 +19,7 @@
 #define _EQEMU_FACTION_H
 
 #include "types.h"
-#include "features.h"
+#include "gamefeatures.h"
 #include <map>
 #include <string>
 

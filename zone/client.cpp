@@ -32,7 +32,7 @@
 extern volatile bool RunLoops;
 
 #include "../common/eqemu_logsys.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/emu_legacy.h"
 #include "../common/spdat.h"
 #include "../common/guilds.h"

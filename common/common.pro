@@ -8,6 +8,8 @@ CONFIG += staticlib
 CONFIG += object_parallel_to_source
 CONFIG += c++11
 
+DEFINES += CLIENT_USE
+
 INCLUDEPATH += $$PWD
 INCLUDEPATH += ../libs/libuv/include
 INCLUDEPATH += ../libs/format
@@ -43,5 +45,16 @@ SOURCES += \
     $$PWD/net/servertalk_server.cpp \
     $$PWD/net/servertalk_server_connection.cpp \
     $$PWD/net/tcp_connection.cpp \
-    $$PWD/net/tcp_server.cpp
-
+    $$PWD/net/tcp_server.cpp \
+    eq_packet.cpp \
+    base_packet.cpp \
+    opcodemgr.cpp \
+    emu_opcodes.cpp \
+    mutex.cpp \
+    unix.cpp \
+    misc.cpp \
+    packet_dump.cpp \
+    crc16.cpp \
+    crc32.cpp \
+    packet_functions.cpp \
+    platform.cpp

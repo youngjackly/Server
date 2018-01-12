@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <iostream>
 #endif
 
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/rulesys.h"
 #include "../common/string_util.h"
 #include "../common/misc_functions.h"

@@ -45,7 +45,7 @@
 
 #include "../common/global_define.h"
 #include "../common/eq_packet.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/guilds.h"
 #include "../common/patches/patches.h"
 #include "../common/ptimer.h"

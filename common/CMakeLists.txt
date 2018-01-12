@@ -146,7 +146,7 @@ SET(common_headers
 	event_sub.h
 	extprofile.h
 	faction.h
-	features.h
+    gamefeatures.h
 	fixed_memory_hash_set.h
 	fixed_memory_variable_hash_set.h
 	global_define.h

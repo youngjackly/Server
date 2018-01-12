@@ -25,7 +25,7 @@
 #include "../common/spdat.h"
 #include "../common/string_util.h"
 #include "../common/emu_versions.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/item_instance.h"
 #include "../common/item_data.h"
 #include "../common/linked_list.h"

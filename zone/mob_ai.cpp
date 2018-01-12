@@ -17,7 +17,7 @@
 */
 
 #include "../common/global_define.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/rulesys.h"
 #include "../common/string_util.h"
 

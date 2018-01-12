@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #define PLATFORM_ZONE 1
 
 #include "../common/global_define.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 #include "../common/queue.h"
 #include "../common/timer.h"
 #include "../common/eq_packet_structs.h"

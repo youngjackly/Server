@@ -18,7 +18,7 @@
 
 #include "../common/global_define.h"
 #include "../common/eq_packet_structs.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 
 #include "client.h"
 

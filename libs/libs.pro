@@ -31,6 +31,7 @@ SOURCES += \
     libuv/src/unix/linux-inotify.c \
     libuv/src/unix/linux-syscalls.c \
     libuv/src/unix/loop.c \
+    libuv/src/unix/loop-watcher.c \
     libuv/src/unix/pipe.c \
     libuv/src/unix/poll.c \
     libuv/src/unix/process.c \

@@ -19,7 +19,7 @@
 
 #include "../common/global_define.h"
 #include "../common/misc_functions.h"
-#include "../common/features.h"
+#include "../common/gamefeatures.h"
 
 #include "quest_parser_collection.h"
 #include "quest_interface.h"

@@ -152,11 +152,14 @@ static const char* LogCategoryName[LogCategory::MaxCategoryID] = {
 	if (LogSys.log_settings[log_category].is_category_enabled == 1)\
 		LogSys.Out(debug_level, log_category, message, ##__VA_ARGS__);\
 } while (0)
-
+#ifdef CLIENT_USE
+#define LogF(debug_level, log_category, message, ...)
+#else
 #define LogF(debug_level, log_category, message, ...) do {\
-	if (LogSys.log_settings[log_category].is_category_enabled == 1)\
-		LogSys.OutF(debug_level, log_category, message, ##__VA_ARGS__);\
+    if (LogSys.log_settings[log_category].is_category_enabled == 1)\
+        LogSys.OutF(debug_level, log_category, message, ##__VA_ARGS__);\
 } while (0)
+#endif
 
 class EQEmuLogSys {
 public:
