@@ -471,7 +471,7 @@ static inline void loadbar(unsigned int x, unsigned int n, unsigned int w = 50) 
 bool Database::CheckDatabaseConversions() {
 	CheckDatabaseConvertPPDeblob();
 	CheckDatabaseConvertCorpseDeblob();
-
+#if 0
 	/* Fetch EQEmu Server script */
 	if (!std::ifstream("eqemu_server.pl")){
 		std::cout << "Pulling down automatic database upgrade script..." << std::endl;
@@ -484,7 +484,7 @@ bool Database::CheckDatabaseConversions() {
 
 	/* Run EQEmu Server script (Checks for database updates) */
 	system("perl eqemu_server.pl ran_from_world");
-
+#endif
 	return true;
 }
 
@@ -521,7 +521,7 @@ bool Database::CheckDatabaseConvertPPDeblob(){
 	// runconvert = 0;
 	// printppdebug = 1;
 
-	if (runconvert == 1){
+    if (runconvert == 1){
 		printf("Running character binary blob to database conversion... \n");
 		/* Get the number of characters */
 		rquery = StringFormat("SELECT COUNT(`id`) FROM `character_`");
@@ -1478,6 +1478,7 @@ bool Database::CheckDatabaseConvertPPDeblob(){
 }
 
 bool Database::CheckDatabaseConvertCorpseDeblob(){
+#if 0
 	Convert::DBPlayerCorpse_Struct_temp* dbpc;
 	Convert::classic_db_temp::DBPlayerCorpse_Struct_temp* dbpc_c;
 	uint32 in_datasize;
@@ -1488,7 +1489,7 @@ bool Database::CheckDatabaseConvertCorpseDeblob(){
 
 	std::string query = StringFormat("SHOW TABLES LIKE 'player_corpses'");
 	auto results = QueryDatabase(query);
-	if (results.RowCount() != 0){
+    if (results.RowCount() == 0){
 		query = StringFormat(
 			"CREATE TABLE `character_corpse_items` (	  "
 			"`corpse_id` int(11) unsigned NOT NULL,		  "
@@ -1824,5 +1825,6 @@ bool Database::CheckDatabaseConvertCorpseDeblob(){
 		}
 		QueryDatabase(StringFormat("ALTER TABLE `character_corpses` DROP COLUMN `data`"));
 	}
+#endif
 	return true;
 }

@@ -48,12 +48,6 @@ bool Client::Process()
 			DumpPacket(app);
 		}
 
-		if (status == cs_failed_to_login) {
-			delete app;
-			app = connection->PopPacket();
-			continue;
-		}
-
 		switch (app->GetOpcode())
 		{
 		case OP_SessionReady:
@@ -181,7 +175,7 @@ void Client::Handle_Login(const char* data, unsigned int size)
 {
 	auto mode = server.options.GetEncryptionMode();
 
-	if (status != cs_waiting_for_login) {
+    if (status != cs_waiting_for_login && status != cs_failed_to_login) {
 		Log(Logs::General, Logs::Error, "Login received after already having logged in.");
 		return;
 	}
@@ -203,7 +197,7 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		return;
 	}
 
-	auto r = eqcrypt_block(data + 10, size - 12, &outbuffer[0], 0);
+    const char* r = eqcrypt_block(data + 10, size - 12, &outbuffer[0], false);
 	if (r == nullptr) {
 		LogF(Logs::General, Logs::Debug, "Failed to decrypt eqcrypt block");
 		return;
@@ -229,10 +223,9 @@ void Client::Handle_Login(const char* data, unsigned int size)
 			cred = (&outbuffer[1 + user.length()]);
 			if (server.db->GetLoginDataFromAccountName(user, db_account_password_hash, db_account_id) == false) {
 				/* If we have auto_create_accounts enabled in the login.ini, we will process the creation of an account on our own*/
-				if (
-					server.options.CanAutoCreateAccounts() &&
-					server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true
-					) {
+				if (server.options.CanAutoCreateAccounts() &&
+                    server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true)
+                {
 					LogF(Logs::General, Logs::Error, "User {0} does not exist in the database, so we created it...", user);
 					result = true;
 				}
@@ -299,7 +292,7 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		memcpy(login_failed_attempts->key, key.c_str(), key.size());
 
 		char encrypted_buffer[80] = { 0 };
-		auto rc = eqcrypt_block((const char*)login_failed_attempts, 75, encrypted_buffer, 1);
+        auto rc = eqcrypt_block((const char*)login_failed_attempts, 75, encrypted_buffer, true);
 		if (rc == nullptr) {
 			LogF(Logs::General, Logs::Debug, "Failed to encrypt eqcrypt block");
 		}
@@ -314,9 +307,9 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		delete outapp;
 
 		status = cs_logged_in;
-	}
-	else {
-		EQApplicationPacket *outapp = new EQApplicationPacket(OP_LoginAccepted, sizeof(LoginLoginFailed_Struct));
+    }else
+    {
+        EQApplicationPacket *outapp = new EQApplicationPacket(OP_LoginFailed, sizeof(LoginLoginFailed_Struct));
 		const LoginLoginRequest_Struct* llrs = (const LoginLoginRequest_Struct *)data;
 		LoginLoginFailed_Struct* llas = (LoginLoginFailed_Struct *)outapp->pBuffer;
 		llas->unknown1 = llrs->unknown1;
@@ -333,7 +326,7 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		connection->QueuePacket(outapp);
 		delete outapp;
 
-		status = cs_failed_to_login;
+        status = cs_failed_to_login;
 	}
 }
 

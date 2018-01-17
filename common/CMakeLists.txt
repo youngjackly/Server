@@ -1,6 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 SET(common_sources
+    encryption.cpp
 	base_packet.cpp
 	classes.cpp
 	condition.cpp
@@ -108,6 +109,7 @@ SET(common_sources
 )
 
 SET(common_headers
+    encryption.h
 	any.h
 	base_packet.h
 	base_data.h

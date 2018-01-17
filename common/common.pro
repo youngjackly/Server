@@ -46,6 +46,7 @@ SOURCES += \
     $$PWD/net/servertalk_server_connection.cpp \
     $$PWD/net/tcp_connection.cpp \
     $$PWD/net/tcp_server.cpp \
+    encryption.cpp \
     eq_packet.cpp \
     base_packet.cpp \
     opcodemgr.cpp \

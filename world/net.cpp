@@ -486,7 +486,6 @@ int main(int argc, char** argv) {
 	Timer InterserverTimer(INTERSERVER_TIMER); // does MySQL pings and auto-reconnect
 	InterserverTimer.Trigger();
 	uint8 ReconnectCounter = 100;
-	std::shared_ptr<EQStreamInterface> eqs;
 	EQStreamInterface *eqsi;
 
 	eqsm.OnNewConnection([&stream_identifier](std::shared_ptr<EQ::Net::EQStream> stream) {
@@ -496,7 +495,6 @@ int main(int argc, char** argv) {
 
 	while (RunLoops) {
 		Timer::SetCurrentTime();
-		eqs = nullptr;
 
 		//give the stream identifier a chance to do its work....
 		stream_identifier.Process();

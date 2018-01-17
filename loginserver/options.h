@@ -29,7 +29,7 @@ public:
 	* Constructor, sets the default options.
 	*/
 	Options() :
-		allow_unregistered(true),
+        allow_unregistered(false),
 		trace(false),
 		dump_in_packets(false),
 		dump_out_packets(false),

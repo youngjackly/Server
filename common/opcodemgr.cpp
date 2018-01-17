@@ -29,6 +29,7 @@ OpcodeManager::OpcodeManager() {
 }
 
 bool OpcodeManager::LoadOpcodesFile(const char *filename, OpcodeSetStrategy *s, bool report_errors) {
+#if 0
 	FILE *opf = fopen(filename, "r");
 	if(opf == nullptr) {
 		fprintf(stderr, "Unable to open opcodes file '%s'. Thats bad.\n", filename);
@@ -74,14 +75,14 @@ bool OpcodeManager::LoadOpcodesFile(const char *filename, OpcodeSetStrategy *s, 
 		eq[line] = curop;
 	}
 	fclose(opf);
-
-
+#endif
 	//do the mapping and store them in the shared memory array
 	bool ret = true;
 	EmuOpcode emu_op;
 	std::map<std::string, uint16>::iterator res;
 	//stupid enum wont let me ++ on it...
 	for(emu_op = OP_Unknown; emu_op < _maxEmuOpcode; emu_op=(EmuOpcode)(emu_op+1)) {
+#if 0
 		//get the name of this emu opcode
 		const char *op_name = OpcodeNames[emu_op];
 		if(op_name[0] == '\0') {
@@ -97,9 +98,12 @@ bool OpcodeManager::LoadOpcodesFile(const char *filename, OpcodeSetStrategy *s, 
 			//ret = false;
 			continue;	//continue to give them a list of all missing opcodes
 		}
+        //ship the mapping off to shared mem.
+        s->Set(emu_op, res->second);
+#else
+        s->Set(emu_op, emu_op);
+#endif
 
-		//ship the mapping off to shared mem.
-		s->Set(emu_op, res->second);
 	}
 
 	return(ret);

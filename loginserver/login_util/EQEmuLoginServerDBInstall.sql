@@ -1,16 +1,21 @@
 DROP TABLE IF EXISTS tblLoginServerAccounts;
 CREATE TABLE IF NOT EXISTS tblLoginServerAccounts (
-  LoginServerID integer unsigned NOT NULL auto_increment,
-  AccountName varchar(30) NOT NULL,
+  LoginServerID integer unsigned NOT NULL auto_increment primary key,
+  AccountName varchar(30) NOT NULL unique key,
   AccountPassword varchar(50) NOT NULL,
   AccountCreateDate timestamp default CURRENT_TIMESTAMP NOT NULL,
   AccountEmail varchar(100) NOT NULL,
   LastLoginDate datetime NOT NULL,
-  LastIPAddress varchar(15) NOT NULL,
-  PRIMARY KEY (LoginServerID, AccountName)
+  LastIPAddress varchar(15) NOT NULL
 ) ENGINE=InnoDB;
 
-insert into tblLoginServerAccounts (AccountName, AccountPassword, AccountEmail, LastLoginDate, LastIPAddress) values('Admin', sha('password'), 'admin@somewhere.com', now(), '127.0.0.1');
+insert into tblLoginServerAccounts (AccountName, 
+AccountPassword, 
+AccountEmail, 
+LastLoginDate, 
+LastIPAddress) values('user004', sha1('123456'), 'admin@somewhere.com', now(), '127.0.0.1');
+
+select * from tblLoginServerAccounts;
 
 DROP TABLE IF EXISTS tblServerListType;
 CREATE TABLE IF NOT EXISTS tblServerListType (
@@ -30,13 +35,20 @@ CREATE TABLE IF NOT EXISTS tblServerAdminRegistration (
 	AccountPassword varchar(30) NOT NULL,
 	FirstName varchar(40) NOT NULL,
 	LastName varchar(50) NOT NULL,
-	Email varchar(100) NULL,
+	Email varchar(100) NOT NULL,
 	RegistrationDate datetime NOT NULL,
 	RegistrationIPAddr varchar(15) NOT NULL,
 	PRIMARY KEY (ServerAdminID, Email)
 ) ENGINE=MyISAM;
 
-INSERT INTO tblServerAdminRegistration (AccountName, AccountPassword, FirstName, LastName, Email, RegistrationDate, RegistrationIPAddr) VALUES ('Admin', 'Password', 'Tom', 'Wilson', 'Tom.Wilson@gmail.com', now(), '0.0.0.0');
+INSERT INTO tblServerAdminRegistration (
+AccountName, 
+AccountPassword, 
+FirstName, 
+LastName, 
+Email, 
+RegistrationDate, 
+RegistrationIPAddr) VALUES ('Admin', 'Password', 'Tom', 'Wilson', 'Tom.Wilson@gmail.com', now(), '0.0.0.0');
 
 DROP TABLE IF EXISTS tblWorldServerRegistration;
 CREATE TABLE IF NOT EXISTS tblWorldServerRegistration (
@@ -54,4 +66,20 @@ CREATE TABLE IF NOT EXISTS tblWorldServerRegistration (
 ) ENGINE=InnoDB;
 
 
-INSERT INTO tblWorldServerRegistration (ServerLongName, ServerTagDescription, ServerShortName, ServerListTypeID, ServerLastLoginDate, ServerLastIPAddr, ServerAdminID, ServerTrusted, Note) VALUES ('My Test Server', 'A test server', 'MTST', 1, now(), '0.0.0.0', 1, 0, 'This is a note for the test server');
+INSERT INTO tblWorldServerRegistration (ServerLongName, 
+ServerTagDescription, 
+ServerShortName, 
+ServerListTypeID, 
+ServerLastLoginDate, 
+ServerLastIPAddr, 
+ServerAdminID, 
+ServerTrusted, 
+Note) VALUES ('My Test Server', 'A test server', 'MTST', 1, now(), '0.0.0.0', 1, 0, 'This is a note for the test server');
+
+SELECT ifnull(WSR.ServerID,999999) AS ServerID, 
+WSR.ServerTagDescription, 
+ifnull(WSR.ServerTrusted,0) AS ServerTrusted, 
+ifnull(SLT.ServerListTypeID,3) AS ServerListTypeID, 
+SLT.ServerListTypeDescription, 
+ifnull(WSR.ServerAdminID,0) AS ServerAdminID 
+FROM tblWorldServerRegistration AS WSR JOIN tblServerListType AS SLT ON WSR.ServerListTypeID = SLT.ServerListTypeID WHERE WSR.ServerShortName = 'MTST'

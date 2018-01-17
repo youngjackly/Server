@@ -6,7 +6,6 @@ SET(eqlogin_sources
 	config.cpp
 	database_mysql.cpp
 	database_postgresql.cpp
-	encryption.cpp
 	main.cpp
 	server_manager.cpp
 	world_server.cpp
@@ -19,7 +18,6 @@ SET(eqlogin_headers
 	database.h
 	database_mysql.h
 	database_postgresql.h
-	encryption.h
 	login_server.h
 	login_structures.h
 	options.h
