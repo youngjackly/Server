@@ -29,8 +29,12 @@
 #ifndef CEREAL_ARCHIVES_BINARY_HPP_
 #define CEREAL_ARCHIVES_BINARY_HPP_
 
+#include <cereal/stringExt.h>
+
 #include <cereal/cereal.hpp>
 #include <sstream>
+
+
 
 namespace cereal
 {

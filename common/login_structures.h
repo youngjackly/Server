@@ -69,20 +69,10 @@ struct LoginFailedAttempts_Struct
 };
 
 struct LoginLoginFailed_Struct {
-	short unknown1;
-	short unknown2;
-	short unknown3;
-	short unknown4;
-	short unknown5;
-	char unknown6[74];
+    char message[74];
 };
 
 struct ServerListHeader_Struct {
-
-	uint32 Unknown1;
-	uint32 Unknown2;
-	uint32 Unknown3;
-	uint32 Unknown4;
 	uint32 NumberOfServers;
 };
 
@@ -101,6 +91,22 @@ struct PlayEverquestResponse_Struct {
 	uint16 Message;
 	uint8 Unknown2[3];
 	uint32 ServerNumber;
+};
+
+struct project
+{
+    char title[30];
+    char createDate[20];
+    char lastUpdateDate[20];
+    char locked[11];
+    char version[11];
+    char createUserId[10];
+};
+
+struct projectList
+{
+    int count;
+    project list[2];
 };
 
 static const unsigned char FailedLoginResponseData[] = {

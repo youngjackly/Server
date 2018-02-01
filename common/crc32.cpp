@@ -1,6 +1,7 @@
 #include "crc32.h"
 #include <assert.h>
 #include <memory.h>
+#include <string.h>
 
 uint32 CRC32Table[256] =
 {
@@ -98,7 +99,7 @@ void CRC32::SetEQChecksum(uchar* in_data, uint32 in_length, uint32 start_at)
 		check = check ^ data;
 	}
 
-	memcpy(in_data, (char*)&check, 4);
+    ::memcpy(in_data, (char*)&check, 4);
 }
 
 uint32 CRC32::Update(const uint8* buf, uint32 bufsize, uint32 crc32var) {

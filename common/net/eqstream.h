@@ -60,8 +60,8 @@ namespace EQ
 			friend class EQStream;
 		};
 
-		class EQStream : public EQStreamInterface
-		{
+        class EQStream : public EQStreamInterface
+        {
 		public:
 			EQStream(EQStreamManager *parent, std::shared_ptr<DaybreakConnection> connection);
 			~EQStream();
@@ -69,7 +69,7 @@ namespace EQ
 			virtual void QueuePacket(const EQApplicationPacket *p, bool ack_req = true);
 			virtual void FastQueuePacket(EQApplicationPacket **p, bool ack_req = true);
 			virtual EQApplicationPacket *PopPacket();
-			virtual void Close();
+            virtual void Close();
 			virtual void ReleaseFromUse() { };
 			virtual void RemoveData() { };
 			virtual std::string GetRemoteAddr() const;

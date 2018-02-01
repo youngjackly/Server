@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #include "server_manager.h"
 #include "login_server.h"
-#include "login_structures.h"
+#include "../common/login_structures.h"
 #include <stdlib.h>
 
 #include "../common/eqemu_logsys.h"
@@ -120,15 +120,7 @@ EQApplicationPacket *ServerManager::CreateServerListPacket(Client *c, uint32 seq
 
 	EQApplicationPacket *outapp = new EQApplicationPacket(OP_ServerListResponse, packet_size);
 	ServerListHeader_Struct *server_list = (ServerListHeader_Struct*)outapp->pBuffer;
-	server_list->Unknown1 = seq;
-	server_list->Unknown2 = 0x00000000;
-	server_list->Unknown3 = 0x01650000;
 
-	/**
-	* Not sure what this is but it should be noted setting it to
-	* 0xFFFFFFFF crashes the client so: don't do that.
-	*/
-	server_list->Unknown4 = 0x00000000;
 	server_list->NumberOfServers = server_count;
 
 	unsigned char *data_pointer = outapp->pBuffer;

@@ -42,24 +42,6 @@ ClientManager::ClientManager()
 		Client *c = new Client(stream, cv_titanium);
 		clients.push_back(c);
 	});
-
-	int sod_port = atoi(server.config->GetVariable("SoD", "port").c_str());
-	EQ::Net::EQStreamManagerOptions sod_opts(sod_port, false, false);
-	sod_stream = new EQ::Net::EQStreamManager(sod_opts);
-	sod_ops = new RegularOpcodeManager;
-	if (!sod_ops->LoadOpcodes(server.config->GetVariable("SoD", "opcodes").c_str()))
-	{
-		Log(Logs::General, Logs::Error, "ClientManager fatal error: couldn't load opcodes for SoD file %s.",
-			server.config->GetVariable("SoD", "opcodes").c_str());
-		run_server = false;
-	}
-
-	sod_stream->OnNewConnection([this](std::shared_ptr<EQ::Net::EQStream> stream) {
-		LogF(Logs::General, Logs::Login_Server, "New SoD client connection from {0}:{1}", stream->RemoteEndpoint(), stream->GetRemotePort());
-		stream->SetOpcodeManager(&sod_ops);
-		Client *c = new Client(stream, cv_sod);
-		clients.push_back(c);
-	});
 }
 
 ClientManager::~ClientManager()
@@ -72,16 +54,6 @@ ClientManager::~ClientManager()
 	if (titanium_ops)
 	{
 		delete titanium_ops;
-	}
-
-	if (sod_stream)
-	{
-		delete sod_stream;
-	}
-
-	if (sod_ops)
-	{
-		delete sod_ops;
 	}
 }
 

@@ -28,7 +28,7 @@ void LoadBaseData(SharedDatabase *database, const std::string &prefix) {
 	mutex.Lock();
 	int records = (database->GetMaxBaseDataLevel() + 1);
 	if(records == 0) {
-		EQ_EXCEPT("Shared Memory", "Unable to get base data from the database.");
+        //EQ_EXCEPT("Shared Memory", "Unable to get base data from the database.");
 	}
 
 	uint32 size = records * 16 * sizeof(BaseDataStruct);

@@ -29,7 +29,7 @@ void LoadSpells(SharedDatabase *database, const std::string &prefix) {
 	mutex.Lock();
 	int records = database->GetMaxSpellID() + 1;
 	if(records == 0) {
-		EQ_EXCEPT("Shared Memory", "Unable to get any spells from the database.");
+        //EQ_EXCEPT("Shared Memory", "Unable to get any spells from the database.");
 	}
 
 	uint32 size = records * sizeof(SPDat_Spell_Struct) + sizeof(uint32);

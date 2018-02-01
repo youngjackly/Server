@@ -2756,7 +2756,8 @@ void BasicWriter<Char>::write_int(T value, Spec spec) {
   }
   case 'n': {
     unsigned num_digits = internal::count_digits(abs_value);
-    fmt::StringRef sep = std::localeconv()->thousands_sep;
+    //make build through on android
+    fmt::StringRef sep = ",";//std::localeconv()->thousands_sep;
     unsigned size = static_cast<unsigned>(
           num_digits + sep.size() * (num_digits - 1) / 3);
     CharPtr p = prepare_int_buffer(size, spec, prefix, prefix_size) + 1;

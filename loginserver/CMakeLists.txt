@@ -19,7 +19,6 @@ SET(eqlogin_headers
 	database_mysql.h
 	database_postgresql.h
 	login_server.h
-	login_structures.h
 	options.h
 	server_manager.h
 	world_server.h

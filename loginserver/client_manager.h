@@ -64,8 +64,6 @@ private:
 	std::list<Client*> clients;
 	OpcodeManager *titanium_ops;
 	EQ::Net::EQStreamManager *titanium_stream;
-	OpcodeManager *sod_ops;
-	EQ::Net::EQStreamManager *sod_stream;
 };
 
 #endif

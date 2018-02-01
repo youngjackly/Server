@@ -93,6 +93,8 @@ enum LogCategory {
 	MaxCategoryID	/* Don't Remove this*/
 };
 
+
+
 /* If you add to this, make sure you update LogCategory */
 static const char* LogCategoryName[LogCategory::MaxCategoryID] = {
 	"",

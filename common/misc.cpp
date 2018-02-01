@@ -25,7 +25,7 @@
 std::map<int,std::string> DBFieldNames;
 
 #ifndef WIN32
-#if defined(FREEBSD) || defined(__CYGWIN__)
+#if defined(FREEBSD) || defined(__CYGWIN__) || defined (ANDROID)
 int print_stacktrace()
 {
 	printf("Insert stack trace here...\n");
@@ -51,8 +51,8 @@ int print_stacktrace()
 	}
 	return(0);
 }
-#endif //!FREEBSD
-#endif //!WIN32
+#endif // !FREEBSD
+#endif // !WIN32
 
 void Unprotect(std::string &s, char what)
 {

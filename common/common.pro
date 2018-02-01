@@ -16,8 +16,6 @@ INCLUDEPATH += ../libs/format
 INCLUDEPATH += ../libs/cereal
 
 HEADERS += \
-    $$PWD/net/console_server.h \
-    $$PWD/net/console_server_connection.h \
     $$PWD/net/crc32.h \
     $$PWD/net/daybreak_connection.h \
     $$PWD/net/daybreak_structs.h \
@@ -28,22 +26,16 @@ HEADERS += \
     $$PWD/net/servertalk_client_connection.h \
     $$PWD/net/servertalk_common.h \
     $$PWD/net/servertalk_legacy_client_connection.h \
-    $$PWD/net/servertalk_server.h \
-    $$PWD/net/servertalk_server_connection.h \
     $$PWD/net/tcp_connection.h \
     $$PWD/net/tcp_server.h
 
 SOURCES += \
-    $$PWD/net/console_server.cpp \
-    $$PWD/net/console_server_connection.cpp \
     $$PWD/net/crc32.cpp \
     $$PWD/net/daybreak_connection.cpp \
     $$PWD/net/eqstream.cpp \
     $$PWD/net/packet.cpp \
     $$PWD/net/servertalk_client_connection.cpp \
     $$PWD/net/servertalk_legacy_client_connection.cpp \
-    $$PWD/net/servertalk_server.cpp \
-    $$PWD/net/servertalk_server_connection.cpp \
     $$PWD/net/tcp_connection.cpp \
     $$PWD/net/tcp_server.cpp \
     encryption.cpp \

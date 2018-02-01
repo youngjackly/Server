@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #include "world_server.h"
 #include "login_server.h"
-#include "login_structures.h"
+#include "../common/login_structures.h"
 #include "config.h"
 
 #include "../common/eqemu_logsys.h"

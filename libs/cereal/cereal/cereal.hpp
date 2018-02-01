@@ -44,6 +44,8 @@
 #include <cereal/details/helpers.hpp>
 #include <cereal/types/base_class.hpp>
 
+#include <cereal/stringExt.h>
+
 namespace cereal
 {
   // ######################################################################
@@ -675,7 +677,7 @@ namespace cereal
         auto name = itsPolymorphicTypeMap.find( id );
         if(name == itsPolymorphicTypeMap.end())
         {
-          throw Exception("Error while trying to deserialize a polymorphic pointer. Could not find type id " + std::to_string(id));
+            throw  Exception("Error while trying to deserialize a polymorphic pointer. Could not find type id " + std::to_string(id));
         }
         return name->second;
       }

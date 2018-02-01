@@ -1,12 +1,13 @@
 DROP TABLE IF EXISTS tblLoginServerAccounts;
 CREATE TABLE IF NOT EXISTS tblLoginServerAccounts (
-  LoginServerID integer unsigned NOT NULL auto_increment primary key,
+  LoginServerID integer unsigned NOT NULL auto_increment,
   AccountName varchar(30) NOT NULL unique key,
   AccountPassword varchar(50) NOT NULL,
   AccountCreateDate timestamp default CURRENT_TIMESTAMP NOT NULL,
   AccountEmail varchar(100) NOT NULL,
   LastLoginDate datetime NOT NULL,
-  LastIPAddress varchar(15) NOT NULL
+  LastIPAddress varchar(15) NOT NULL,
+  primary key(LoginServerID, AccountName)
 ) ENGINE=InnoDB;
 
 insert into tblLoginServerAccounts (AccountName, 
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS tblServerListType (
 	ServerListTypeID integer unsigned NOT NULL,
 	ServerListTypeDescription varchar(20) NOT NULL,
 	PRIMARY KEY (ServerListTypeID)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 INSERT INTO tblServerListType (ServerListTypeID, ServerListTypeDescription) VALUES (1, 'Legends');
 INSERT INTO tblServerListType (ServerListTypeID, ServerListTypeDescription) VALUES (2, 'Preferred');

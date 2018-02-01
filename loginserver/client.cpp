@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #include "client.h"
 #include "login_server.h"
-#include "login_structures.h"
+#include "../common/login_structures.h"
 #include "../common/misc_functions.h"
 #include "../common/eqemu_logsys.h"
 
@@ -101,6 +101,20 @@ bool Client::Process()
 			Handle_Play((const char*)app->pBuffer);
 			break;
 		}
+        case OP_ProjectListRequest:
+        {
+            EQApplicationPacket pack(OP_ProjectListResponse, 324);
+            projectList* list = (projectList*)pack.pBuffer;
+            memset(list, 0, 324);
+            list->count = 5;
+            for(int i = 0; i < list->count; ++i)
+            {
+                memcpy(list->list[i].title, "aaaaa", 5);
+            }
+            connection->QueuePacket(&pack);
+
+        }
+            break;
 		default:
 		{
 			if (LogSys.log_settings[Logs::Client_Server_Packet_Unhandled].is_category_enabled == 1) {
@@ -310,14 +324,8 @@ void Client::Handle_Login(const char* data, unsigned int size)
     }else
     {
         EQApplicationPacket *outapp = new EQApplicationPacket(OP_LoginFailed, sizeof(LoginLoginFailed_Struct));
-		const LoginLoginRequest_Struct* llrs = (const LoginLoginRequest_Struct *)data;
 		LoginLoginFailed_Struct* llas = (LoginLoginFailed_Struct *)outapp->pBuffer;
-		llas->unknown1 = llrs->unknown1;
-		llas->unknown2 = llrs->unknown2;
-		llas->unknown3 = llrs->unknown3;
-		llas->unknown4 = llrs->unknown4;
-		llas->unknown5 = llrs->unknown5;
-		memcpy(llas->unknown6, FailedLoginResponseData, sizeof(FailedLoginResponseData));
+        memcpy(llas->message, FailedLoginResponseData, sizeof(FailedLoginResponseData));
 
 		if (server.options.IsDumpOutPacketsOn()) {
 			DumpPacket(outapp);
@@ -339,15 +347,15 @@ void Client::Handle_Play(const char* data)
 	}
 
 	const PlayEverquestRequest_Struct *play = (const PlayEverquestRequest_Struct*)data;
-	unsigned int server_id_in = (unsigned int)play->ServerNumber;
-	unsigned int sequence_in = (unsigned int)play->Sequence;
+    unsigned int server_id_in = play->ServerNumber;
+    unsigned int sequence_in = play->Sequence;
 
 	if (server.options.IsTraceOn())
 	{
 		Log(Logs::General, Logs::Login_Server, "Play received from client, server number %u sequence %u.", server_id_in, sequence_in);
 	}
 
-	this->play_server_id = (unsigned int)play->ServerNumber;
+    this->play_server_id = play->ServerNumber;
 	play_sequence_id = sequence_in;
 	play_server_id = server_id_in;
 	server.server_manager->SendUserToWorldRequest(server_id_in, account_id);
