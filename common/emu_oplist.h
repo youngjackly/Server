@@ -566,4 +566,7 @@ N(OP_ZoneUnavail),
 N(OP_ResetAA),
 N(OP_ProjectListRequest),
 N(OP_ProjectListResponse),
+N(OP_moshouEnterWorld),
+N(OP_moshouAddClient),
+N(OP_moshUpdateWorld),
 // mail and chat opcodes located in ../mail_oplist.h

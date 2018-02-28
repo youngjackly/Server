@@ -237,5 +237,4 @@ private:
 };
 
 extern EQEmuLogSys LogSys;
-
 #endif
